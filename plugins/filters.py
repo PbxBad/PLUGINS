@@ -6,8 +6,12 @@ from pyrogram import filters, enums
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 from utils.filtersdb import *
+from utils.error import capture_err
+from utils.permissions import adminsOnly, member_permissions
 
-@app.on_message(filters.command("filter"))
+
+@app.on_message(filters.command("filter") & ~filters.private & ~BANNED_USERS)
+@adminsOnly("can_change_info")
 async def _filter(client, message):
     
     chat_id = message.chat.id 
@@ -66,7 +70,8 @@ async def FilterCheckker(client, message):
                 data_type=data_type
             )
 
-@app.on_message(filters.command('filters') & filters.group)
+@app.on_message(filters.command("filters") & ~filters.private & ~BANNED_USERS)
+@capture_err
 async def _filters(client, message):
     chat_id = message.chat.id
     chat_title = message.chat.title 
@@ -89,7 +94,8 @@ async def _filters(client, message):
         filters_list
     )
 
-@app.on_message(filters.command('stopall'))
+@app.on_message(filters.command("stopall") & ~filters.private & ~BANNED_USERS)
+@adminsOnly("can_change_info")
 async def stopall(client, message):
     chat_id = message.chat.id
     chat_title = message.chat.title 
