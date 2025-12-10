@@ -1,5 +1,6 @@
 import re
 from BADMUSIC import app
+from config import BANNED_USERS
 from Pbx import Owner
 from BADMUSIC.utils.filtersfuncdb import GetFIlterMessage, get_text_reason, SendFilterMessage
 from pyrogram import filters, enums
