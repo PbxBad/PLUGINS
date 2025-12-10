@@ -20,3 +20,4 @@ unidecode
 uvloop==0.21.0
 werkzeug
 kurigram>=2.2.13
+git+https://github.com/TheChampu/TheAPI
