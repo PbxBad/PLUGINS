@@ -1,6 +1,6 @@
 import re
 from BADMUSIC import app
-from config import BANNED_USERS
+from Pbx import Owner
 from BADMUSIC.utils.filtersfuncdb import GetFIlterMessage, get_text_reason, SendFilterMessage
 from pyrogram import filters, enums
 from pyrogram.enums import ChatMemberStatus
@@ -10,7 +10,7 @@ from utils.error import capture_err
 from utils.permissions import adminsOnly, member_permissions
 
 
-@app.on_message(filters.command("filter") & ~filters.private)
+@app.on_message(filters.command(["filter"]))
 @adminsOnly("can_change_info")
 async def _filter(client, message):
     
@@ -70,7 +70,7 @@ async def FilterCheckker(client, message):
                 data_type=data_type
             )
 
-@app.on_message(filters.command("filters") & ~filters.private)
+@app.on_message(filters.command(["filters"]))
 @capture_err
 async def _filters(client, message):
     chat_id = message.chat.id
@@ -94,7 +94,7 @@ async def _filters(client, message):
         filters_list
     )
 
-@app.on_message(filters.command("stopall") & ~filters.private)
+@app.on_message(filters.command(["stopall"]))
 @adminsOnly("can_change_info")
 async def stopall(client, message):
     chat_id = message.chat.id
