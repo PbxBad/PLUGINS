@@ -11,7 +11,7 @@ from utils.error import capture_err
 from utils.permissions import adminsOnly, member_permissions
 
 
-@app.on_message(filters.command("filter") & ~filters.private & ~BANNED_USERS)
+@app.on_message(filters.command("filter") & ~filters.private)
 @adminsOnly("can_change_info")
 async def _filter(client, message):
     
@@ -71,7 +71,7 @@ async def FilterCheckker(client, message):
                 data_type=data_type
             )
 
-@app.on_message(filters.command("filters") & ~filters.private & ~BANNED_USERS)
+@app.on_message(filters.command("filters") & ~filters.private)
 @capture_err
 async def _filters(client, message):
     chat_id = message.chat.id
@@ -95,7 +95,7 @@ async def _filters(client, message):
         filters_list
     )
 
-@app.on_message(filters.command("stopall") & ~filters.private & ~BANNED_USERS)
+@app.on_message(filters.command("stopall") & ~filters.private)
 @adminsOnly("can_change_info")
 async def stopall(client, message):
     chat_id = message.chat.id
