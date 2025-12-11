@@ -2,7 +2,7 @@ import asyncio
 
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-OWNERS = "7009601543"
+OWNERS = "7616808278"
 from BADMUSIC import app
 from BADMUSIC.utils.database import add_served_chat, get_assistant
 
@@ -16,7 +16,7 @@ async def clones(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "💫sᴏᴜʀᴄᴇ🌸", url=f"https://github.com/Badhacker98/BADMUSIC/fork"
+                        "💫sᴏᴜʀᴄᴇ🌸", url=f"https://github.com/PbxBad/BADMUSIC/fork"
                     )
                 ]
             ]
