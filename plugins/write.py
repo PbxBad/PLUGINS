@@ -9,8 +9,8 @@ import uuid
 
 # ================= CONFIG =================
 
-PAGE_PATH = "BADMUSIC/assets/page.jpg"
-FONT_PATH = "BADMUSIC/assets/handwriting.ttf"
+PAGE_PATH = "assets/page.jpg"
+FONT_PATH = "assets/handwriting.ttf"
 
 API_WRITE_CMD = "write"        # cloud api style
 NOTEBOOK_WRITE_CMD = "nwrite"  # notebook handwriting style
