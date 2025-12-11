@@ -128,7 +128,7 @@ async def create_couple_image(client, c1_id, c2_id, chat_id):
         print(f"Error creating couple image: {e}")
         return None
 
-@app.on_cmd(["couple", "couples", "lover", "shipping"])
+@app.on_message(["couple", "couples", "lover", "shipping"])
 async def nibba_nibbi(client, message):
     if message.from_user.id == 5540249238:
         my = await client.get_users("rfxtuv")
