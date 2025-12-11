@@ -87,7 +87,7 @@ async def create_couple_image(client, c1_id, c2_id, chat_id):
         # Select random background
         xy = ["Bad1", "Bad2", "Bad3"]
         x = random.choice(xy)
-        img = Image.open(f"resources/image/C/{x}.png")
+        img = Image.open(f"assets/image/C/{x}.png")
         
         # Resize profile pictures
         img1 = img1.resize((680, 680))
