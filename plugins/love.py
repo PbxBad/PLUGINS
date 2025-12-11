@@ -1,7 +1,5 @@
 import random
-
 from pyrogram import filters
-
 from BADMUSIC import app
 
 
@@ -32,25 +30,35 @@ def get_random_message(love_percentage):
         )
 
 
-@app.on_message(filters.command("love", prefixes="/"))
-def love_command(client, message):
-    command, *args = message.text.split(" ")
-    if len(args) >= 2:
-        name1 = args[0].strip()
-        name2 = args[1].strip()
+@app.on_message(filters.command("love"))
+async def love_command(client, message):
+    args = message.text.split()
+
+    if len(args) >= 3:
+        name1 = args[1]
+        name2 = args[2]
 
         love_percentage = random.randint(10, 100)
         love_message = get_random_message(love_percentage)
 
-        response = f"{name1}💕 + {name2}💕 = {love_percentage}%\n\n{love_message}"
+        response = (
+            f"💞 **Love Calculator Result** 💞\n\n"
+            f"**{name1}** ❤️ + **{name2}** ❤️ = **{love_percentage}%**\n\n"
+            f"💬 *{love_message}*"
+        )
     else:
-        response = "Please enter two names after /love command."
-    app.send_message(message.chat.id, response)
+        response = "Please enter two names like:\n`/love Rahul Priya`"
+
+    await message.reply_text(response)
 
 
 __MODULE__ = "ʟᴏᴠᴇ"
 __HELP__ = """
-**ʟᴏᴠᴇ ᴄᴀʟᴄᴜʟᴀᴛᴏʀ:**
+**💘 ʟᴏᴠᴇ ᴄᴀʟᴄᴜʟᴀᴛᴏʀ 💘**
 
-• `/love [name1] [name2]`: Cᴀʟᴄᴜʟᴀᴛᴇs ᴛʜᴇ ᴘᴇʀᴄᴇɴᴛᴀɢᴇ ᴏғ ʟᴏᴠᴇ ʙᴇᴛᴡᴇᴇɴ ᴛᴡᴏ ᴘᴇᴏᴘʟᴇ.
+• `/love [name1] [name2]`
+    → Cᴀʟᴄᴜʟᴀᴛᴇs ᴛʜᴇ ʟᴏᴠᴇ ᴘᴇʀᴄᴇɴᴛᴀɢᴇ ʙᴇᴛᴡᴇᴇɴ ᴛᴡᴏ ᴘᴇᴏᴘʟᴇ.
+
+**Example:**
+`/love Aman Simran`
 """
