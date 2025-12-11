@@ -5,16 +5,20 @@ from pyrogram import filters
 from pyrogram.types import Message
 from BADMUSIC import app
 
-@app.on_message(filters.command("mmf"))
-async def mmf(_, message: Message):
+@app.on_message(filters.command(["mmf", "memify"]))
+async def memify(_, message: Message):
     chat_id = message.chat.id
     reply_message = message.reply_to_message
+
+    if not reply_message:
+        await message.reply_text("**Reply to an sticker to memify it.**")
+        return
 
     if len(message.text.split()) < 2:
         await message.reply_text("**Give me text after /mmf to memify.**")
         return
 
-    msg = await message.reply_text("**Memifying this image! ✊🏻**")
+    msg = await message.reply_text("**Memifying this image!**")
     text = message.text.split(None, 1)[1]
     file = await app.download_media(reply_message)
 
@@ -23,20 +27,21 @@ async def mmf(_, message: Message):
 
     await msg.delete()
 
-    os.remove(meme)
-
+    if os.path.exists(meme):
+        os.remove(meme)
 
 async def drawText(image_path, text):
     img = Image.open(image_path)
 
-    os.remove(image_path)
+    if os.path.exists(image_path):
+        os.remove(image_path)
 
     i_width, i_height = img.size
 
     if os.name == "nt":
         fnt = "arial.ttf"
     else:
-        fnt = ".assets/hiroko.ttf"
+        fnt = "assets/assfont.ttf"
 
     m_font = ImageFont.truetype(fnt, int((70 / 640) * i_width))
 
@@ -148,24 +153,21 @@ async def drawText(image_path, text):
             current_h += u_height + pad
 
     image_name = "memify.webp"
-
     webp_file = os.path.join(image_name)
 
     img.save(webp_file, "webp")
 
     return webp_file
-      
-__MODULE__ = "ᴍᴍғ"
-__HELP__ = """
-**COMMANDS**:
-- /mmf: ᴡʀɪᴛᴇ ᴛᴇxᴛ ᴏɴ ᴀɴ ᴄʟᴏᴜᴅ ᴀɴᴅ ɢᴇᴛ ᴀɴ ᴇᴅɪᴛᴇᴅ ᴘʜᴏᴛᴏ, sᴛɪᴄᴋᴇʀ
-`/rmbg` ᴀꜱ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇᴅɪᴀ ʙᴀʙʏ🥀
 
-**INFO**:
-- ᴍᴏᴅᴜʟᴇ ɴᴀᴍᴇ: ᴍᴍғ
-- ᴅᴇsᴄʀɪᴘᴛɪᴏɴ: ᴡʀɪᴛᴇ ᴛᴇxᴛ ᴏɴ ᴀɴ ᴄʟᴏᴜᴅ ᴀɴᴅ ɢᴇᴛ ᴀɴ ᴇᴅɪᴛᴇᴅ ᴘʜᴏᴛᴏ, sᴛɪᴄᴋᴇʀ
-- ᴄᴏᴍᴍᴀɴᴅs: /mmf
-- ᴘᴇʀᴍɪssɪᴏɴs ɴᴇᴇᴅᴇᴅ: ɴᴏɴᴇ
 
-**NOTE**:
-- ᴜsᴇ ᴅɪʀᴇᴄᴛʟʏ ɪɴ ᴀ ɢʀᴏᴜᴘ ᴄʜᴀᴛ ᴡɪᴛʜ ᴍᴇ ғᴏʀ ᴛʜᴇ ʙᴇsᴛ ʀᴇsᴜʟᴛs."""
+__MODULE__ = "ᴍᴇᴍɪꜰʏ"
+__HELP__ = """ 
+
+## ᴍᴇᴍɪꜰʏ 📝
+
+» `/mmf <text>` : 
+ʀᴇᴘʟʏ ᴛᴏ ᴀɴʏ ꜱᴛɪᴄᴋᴇʀ ᴀɴᴅ ᴀᴅᴅ ᴀ ᴛᴇxᴛ ᴏɴ ɪᴛ ʟɪᴋᴇ ᴀ ᴍᴇᴍᴇ  
+ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴇᴅɪᴛꜱ ᴛʜᴇ ꜱᴛɪᴄᴋᴇʀ ɪɴᴛᴏ ᴀ ᴍᴇᴍᴇ ᴡɪᴛʜ ʏᴏᴜʀ ᴛᴇxᴛ 💬
+
+"""
+    
